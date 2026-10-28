@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>oth · supQ Docs</title>
+  <meta name="description" content="Hooks that run on their own thread, so the hooked game code cannot see your stack.">
+  <meta name="theme-color" content="#060408">
+  <meta property="og:title" content="oth · supQ Docs">
+  <meta property="og:description" content="Hooks that run on their own thread, so the hooked game code cannot see your stack.">
+  <link rel="icon" href="/logo-64.png" sizes="64x64">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=mv9p1web">
+</head>
+<body>
+  <canvas id="waveCanvas" class="wave-canvas" aria-hidden="true"></canvas>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open navigation"><svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <a class="brand" href="/"><img src="/logo-64.png" alt="" width="26" height="26"><span>supQ</span><span class="brand-tag">Docs</span></a>
+      <button class="search-trigger" id="searchBtn" aria-label="Search the docs">
+        <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><span>Search</span><kbd>Ctrl</kbd><kbd>K</kbd>
+      </button>
+      <div class="topbar-links">
+        <a class="top-link" href="https://supq.lol">supq.lol</a>
+        <a class="icon-btn" href="https://discord.gg/SeC9jXhxGb" target="_blank" rel="noopener" aria-label="Discord"><svg viewBox="0 0 127.14 96.36" width="20" height="16" fill="currentColor" aria-hidden="true"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,45.91,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,45.91,96.12,53,91.08,65.69,84.69,65.69Z"/></svg></a>
+      </div>
+    </div>
+  </header>
+  <div class="layout">
+    <nav class="sidebar" id="sidebar" aria-label="Libraries"><a class="side-link" href="/"><svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2z"/><path d="M22 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z"/></svg><span>Introduction</span></a><div class="side-group">
+      <div class="side-heading">Scripting</div>
+      
+      <details class="side-lib">
+        <summary class="side-link" data-href="/closures/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5a2 2 0 0 0 2 2h1"/><path d="M16 21h1a2 2 0 0 0 2-2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></svg><span>Closures</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/closures/#hookfunction">hookfunction</a><a class="side-fn" href="/closures/#restorefunction">restorefunction</a><a class="side-fn" href="/closures/#isfunctionhooked">isfunctionhooked</a><a class="side-fn" href="/closures/#hookmetamethod">hookmetamethod</a><a class="side-fn" href="/closures/#newcclosure">newcclosure</a><a class="side-fn" href="/closures/#newlclosure">newlclosure</a><a class="side-fn" href="/closures/#clonefunction">clonefunction</a><a class="side-fn" href="/closures/#iscclosure">iscclosure</a><a class="side-fn" href="/closures/#islclosure">islclosure</a><a class="side-fn" href="/closures/#isnewcclosure">isnewcclosure</a><a class="side-fn" href="/closures/#isexecutorclosure">isexecutorclosure</a><a class="side-fn" href="/closures/#checkcaller">checkcaller</a><a class="side-fn" href="/closures/#getfunctionhash">getfunctionhash</a><a class="side-fn" href="/closures/#setstackhidden">setstackhidden</a><a class="side-fn" href="/closures/#isstackhidden">isstackhidden</a><a class="side-fn" href="/closures/#comparefunctions">comparefunctions</a><a class="side-fn" href="/closures/#hookproto">hookproto</a><a class="side-fn" href="/closures/#restoreproto">restoreproto</a><a class="side-fn" href="/closures/#isprotohooked">isprotohooked</a><a class="side-fn" href="/closures/#loadstring">loadstring</a><a class="side-fn" href="/closures/#runbytecode">runbytecode</a><a class="side-fn" href="/closures/#dumpbytecode">dumpbytecode</a><a class="side-fn" href="/closures/#gethook">gethook</a><a class="side-fn" href="/closures/#trampoline-call">trampoline_call</a></div>
+      </details><details class="side-lib">
+        <summary class="side-link" data-href="/debug/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="6" width="8" height="14" rx="4"/><path d="M19 7l-3 2M5 7l3 2M19 19l-3-2M5 19l3-2M20 13h-4M4 13h4M10 4l1 2M14 4l-1 2"/></svg><span>Debug</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/debug/#debug-getconstants">debug.getconstants</a><a class="side-fn" href="/debug/#debug-getconstant">debug.getconstant</a><a class="side-fn" href="/debug/#debug-setconstant">debug.setconstant</a><a class="side-fn" href="/debug/#debug-getupvalues">debug.getupvalues</a><a class="side-fn" href="/debug/#debug-getupvalue">debug.getupvalue</a><a class="side-fn" href="/debug/#debug-setupvalue">debug.setupvalue</a><a class="side-fn" href="/debug/#debug-getprotos">debug.getprotos</a><a class="side-fn" href="/debug/#debug-getproto">debug.getproto</a><a class="side-fn" href="/debug/#debug-getstack">debug.getstack</a><a class="side-fn" href="/debug/#debug-setstack">debug.setstack</a><a class="side-fn" href="/debug/#debug-getinfo">debug.getinfo</a><a class="side-fn" href="/debug/#debug-setinfo">debug.setinfo</a><a class="side-fn" href="/debug/#debug-setname">debug.setname</a><a class="side-fn" href="/debug/#debug-getcallstack">debug.getcallstack</a><a class="side-fn" href="/debug/#debug-validlevel">debug.validlevel</a><a class="side-fn" href="/debug/#debug-getregistry">debug.getregistry</a><a class="side-fn" href="/debug/#debug-getsafeenv">debug.getsafeenv</a><a class="side-fn" href="/debug/#debug-setsafeenv">debug.setsafeenv</a></div>
+      </details><details class="side-lib">
+        <summary class="side-link" data-href="/reflection/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/></svg><span>Reflection</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/reflection/#gethiddenproperty">gethiddenproperty</a><a class="side-fn" href="/reflection/#sethiddenproperty">sethiddenproperty</a><a class="side-fn" href="/reflection/#gethiddenproperties">gethiddenproperties</a><a class="side-fn" href="/reflection/#getproperties">getproperties</a><a class="side-fn" href="/reflection/#isscriptable">isscriptable</a><a class="side-fn" href="/reflection/#setscriptable">setscriptable</a><a class="side-fn" href="/reflection/#getbspval">getbspval</a><a class="side-fn" href="/reflection/#getpcd">getpcd</a><a class="side-fn" href="/reflection/#getcallbackvalue">getcallbackvalue</a><a class="side-fn" href="/reflection/#setcallbackvalue">setcallbackvalue</a><a class="side-fn" href="/reflection/#getthreadidentity">getthreadidentity</a><a class="side-fn" href="/reflection/#setthreadidentity">setthreadidentity</a><a class="side-fn" href="/reflection/#isnetworkowner">isnetworkowner</a><a class="side-fn" href="/reflection/#getsimulationradius">getsimulationradius</a><a class="side-fn" href="/reflection/#setsimulationradius">setsimulationradius</a></div>
+      </details><details class="side-lib">
+        <summary class="side-link" data-href="/metatable/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Metatable</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/metatable/#getrawmetatable">getrawmetatable</a><a class="side-fn" href="/metatable/#setrawmetatable">setrawmetatable</a><a class="side-fn" href="/metatable/#getmetafield">getmetafield</a><a class="side-fn" href="/metatable/#hasmetafield">hasmetafield</a><a class="side-fn" href="/metatable/#hasmetatable">hasmetatable</a><a class="side-fn" href="/metatable/#setreadonly">setreadonly</a><a class="side-fn" href="/metatable/#isreadonly">isreadonly</a><a class="side-fn" href="/metatable/#makereadonly">makereadonly</a><a class="side-fn" href="/metatable/#makewritable">makewritable</a><a class="side-fn" href="/metatable/#iswritable">iswritable</a><a class="side-fn" href="/metatable/#getnamecallmethod">getnamecallmethod</a><a class="side-fn" href="/metatable/#setnamecallmethod">setnamecallmethod</a></div>
+      </details><details class="side-lib">
+        <summary class="side-link" data-href="/environment/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg><span>Environment</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/environment/#getgenv">getgenv</a><a class="side-fn" href="/environment/#getrenv">getrenv</a><a class="side-fn" href="/environment/#gettenv">gettenv</a><a class="side-fn" href="/environment/#getscriptglobals">getscriptglobals</a><a class="side-fn" href="/environment/#getgc">getgc</a><a class="side-fn" href="/environment/#filtergc">filtergc</a><a class="side-fn" href="/environment/#getreg">getreg</a><a class="side-fn" href="/environment/#getallthreads">getallthreads</a><a class="side-fn" href="/environment/#getthreads">getthreads</a><a class="side-fn" href="/environment/#isexecutorthread">isexecutorthread</a></div>
+      </details><details class="side-lib">
+        <summary class="side-link" data-href="/scripts/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M10 13l-2 2 2 2M14 13l2 2-2 2"/></svg><span>Scripts</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/scripts/#getscripts">getscripts</a><a class="side-fn" href="/scripts/#getrunningscripts">getrunningscripts</a><a class="side-fn" href="/scripts/#getloadedmodules">getloadedmodules</a><a class="side-fn" href="/scripts/#getmodules">getmodules</a><a class="side-fn" href="/scripts/#getcallingscript">getcallingscript</a><a class="side-fn" href="/scripts/#getscriptfromthread">getscriptfromthread</a><a class="side-fn" href="/scripts/#getscriptthread">getscriptthread</a><a class="side-fn" href="/scripts/#getsenv">getsenv</a><a class="side-fn" href="/scripts/#getmenv">getmenv</a><a class="side-fn" href="/scripts/#getscriptclosure">getscriptclosure</a><a class="side-fn" href="/scripts/#getscriptbytecode">getscriptbytecode</a><a class="side-fn" href="/scripts/#getscripthash">getscripthash</a><a class="side-fn" href="/scripts/#getfunctionbytecode">getfunctionbytecode</a><a class="side-fn" href="/scripts/#getinstancesbyclass">getinstancesbyclass</a></div>
+      </details><details class="side-lib">
+        <summary class="side-link" data-href="/bit/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="14" y="14" width="4" height="6" rx="2"/><rect x="6" y="4" width="4" height="6" rx="2"/><path d="M6 20h4M14 10h4M6 14h2v6M14 4h2v6"/></svg><span>Bit</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/bit/#bit-band">bit.band</a><a class="side-fn" href="/bit/#bit-bor">bit.bor</a><a class="side-fn" href="/bit/#bit-bxor">bit.bxor</a><a class="side-fn" href="/bit/#bit-bnot">bit.bnot</a><a class="side-fn" href="/bit/#bit-lshift">bit.lshift</a><a class="side-fn" href="/bit/#bit-rshift">bit.rshift</a><a class="side-fn" href="/bit/#bit-arshift">bit.arshift</a><a class="side-fn" href="/bit/#bit-rol">bit.rol</a><a class="side-fn" href="/bit/#bit-ror">bit.ror</a><a class="side-fn" href="/bit/#bit-bswap">bit.bswap</a><a class="side-fn" href="/bit/#bit-tobit">bit.tobit</a><a class="side-fn" href="/bit/#bit-tohex">bit.tohex</a><a class="side-fn" href="/bit/#bit-badd">bit.badd</a><a class="side-fn" href="/bit/#bit-bsub">bit.bsub</a><a class="side-fn" href="/bit/#bit-bmul">bit.bmul</a><a class="side-fn" href="/bit/#bit-bdiv">bit.bdiv</a></div>
+      </details>
+    </div><div class="side-group">
+      <div class="side-heading">Instances &amp; Events</div>
+      
+      <details class="side-lib">
+        <summary class="side-link" data-href="/instances/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 16.5 3 14v-4l4-2.5 4 2.5v4zM7 16.5V12M17 16.5 13 14v-4l4-2.5 4 2.5v4zM17 16.5V12M12 9 8 6.5v-4L12 0l4 2.5v4z"/></svg><span>Instances</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/instances/#gethui">gethui</a><a class="side-fn" href="/instances/#getinstances">getinstances</a><a class="side-fn" href="/instances/#getnilinstances">getnilinstances</a><a class="side-fn" href="/instances/#getinstancecache">getinstancecache</a><a class="side-fn" href="/instances/#getreferencedby">getreferencedby</a><a class="side-fn" href="/instances/#fireclickdetector">fireclickdetector</a><a class="side-fn" href="/instances/#fireproximityprompt">fireproximityprompt</a><a class="side-fn" href="/instances/#firetouchinterest">firetouchinterest</a><a class="side-fn" href="/instances/#getproximitypromptduration">getproximitypromptduration</a><a class="side-fn" href="/instances/#setproximitypromptduration">setproximitypromptduration</a><a class="side-fn" href="/instances/#getrendersteppedlist">getrendersteppedlist</a><a class="side-fn" href="/instances/#getcustomasset">getcustomasset</a></div>
+      </details><details class="side-lib">
+        <summary class="side-link" data-href="/cache/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5M3 12a9 3 0 0 0 18 0"/></svg><span>Cache</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/cache/#cache-invalidate">cache.invalidate</a><a class="side-fn" href="/cache/#cache-iscached">cache.iscached</a><a class="side-fn" href="/cache/#cache-replace">cache.replace</a><a class="side-fn" href="/cache/#cloneref">cloneref</a><a class="side-fn" href="/cache/#compareinstances">compareinstances</a></div>
+      </details><details class="side-lib">
+        <summary class="side-link" data-href="/signals/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8a6 6 0 0 1 0 8.4M7.8 16.2a6 6 0 0 1 0-8.4M19.1 4.9a10 10 0 0 1 0 14.2M4.9 19.1a10 10 0 0 1 0-14.2"/></svg><span>Signals</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/signals/#getconnections">getconnections</a><a class="side-fn" href="/signals/#getconnection">getconnection</a><a class="side-fn" href="/signals/#firesignal">firesignal</a><a class="side-fn" href="/signals/#replicatesignal">replicatesignal</a><a class="side-fn" href="/signals/#cansignalreplicate">cansignalreplicate</a><a class="side-fn" href="/signals/#getsignalarguments">getsignalarguments</a><a class="side-fn" href="/signals/#getsignalargumentsinfo">getsignalargumentsinfo</a><a class="side-fn" href="/signals/#getsignalwhitelist">getsignalwhitelist</a><a class="side-fn" href="/signals/#hooksignal">hooksignal</a></div>
+      </details><details class="side-lib">
+        <summary class="side-link" data-href="/actors/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M9 2v2M15 20v2M9 20v2M2 15h2M2 9h2M20 15h2M20 9h2"/></svg><span>Actors</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/actors/#getactors">getactors</a><a class="side-fn" href="/actors/#run-on-actor">run_on_actor</a><a class="side-fn" href="/actors/#run-on-thread">run_on_thread</a><a class="side-fn" href="/actors/#getactorthreads">getactorthreads</a><a class="side-fn" href="/actors/#getactorfromthread">getactorfromthread</a><a class="side-fn" href="/actors/#getdeletedactors">getdeletedactors</a><a class="side-fn" href="/actors/#get-current-actor">get_current_actor</a><a class="side-fn" href="/actors/#isparallel">isparallel</a><a class="side-fn" href="/actors/#getluastate">getluastate</a><a class="side-fn" href="/actors/#getgamestate">getgamestate</a><a class="side-fn" href="/actors/#create-comm-channel">create_comm_channel</a><a class="side-fn" href="/actors/#get-comm-channel">get_comm_channel</a><a class="side-fn" href="/actors/#on-actor-state-created">on_actor_state_created</a></div>
+      </details>
+    </div><div class="side-group">
+      <div class="side-heading">System</div>
+      
+      <details class="side-lib">
+        <summary class="side-link" data-href="/filesystem/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9l-.8-1.2A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2z"/></svg><span>Filesystem</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/filesystem/#readfile">readfile</a><a class="side-fn" href="/filesystem/#writefile">writefile</a><a class="side-fn" href="/filesystem/#appendfile">appendfile</a><a class="side-fn" href="/filesystem/#delfile">delfile</a><a class="side-fn" href="/filesystem/#isfile">isfile</a><a class="side-fn" href="/filesystem/#listfiles">listfiles</a><a class="side-fn" href="/filesystem/#makefolder">makefolder</a><a class="side-fn" href="/filesystem/#delfolder">delfolder</a><a class="side-fn" href="/filesystem/#isfolder">isfolder</a><a class="side-fn" href="/filesystem/#loadfile">loadfile</a><a class="side-fn" href="/filesystem/#dofile">dofile</a><a class="side-fn" href="/filesystem/#getcustomasset">getcustomasset</a><a class="side-fn" href="/filesystem/#openfiledialog">openfiledialog</a><a class="side-fn" href="/filesystem/#openfilesdialog">openfilesdialog</a><a class="side-fn" href="/filesystem/#openfolderdialog">openfolderdialog</a><a class="side-fn" href="/filesystem/#savefiledialog">savefiledialog</a></div>
+      </details><details class="side-lib">
+        <summary class="side-link" data-href="/input/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="7"/><path d="M12 6v4"/></svg><span>Input</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/input/#keypress">keypress</a><a class="side-fn" href="/input/#keyrelease">keyrelease</a><a class="side-fn" href="/input/#keyclick">keyclick</a><a class="side-fn" href="/input/#mouse1click">mouse1click</a><a class="side-fn" href="/input/#mouse1press">mouse1press</a><a class="side-fn" href="/input/#mouse1release">mouse1release</a><a class="side-fn" href="/input/#mouse2click">mouse2click</a><a class="side-fn" href="/input/#mouse2press">mouse2press</a><a class="side-fn" href="/input/#mouse2release">mouse2release</a><a class="side-fn" href="/input/#mousemoveabs">mousemoveabs</a><a class="side-fn" href="/input/#mousemoverel">mousemoverel</a><a class="side-fn" href="/input/#mousescroll">mousescroll</a><a class="side-fn" href="/input/#isrbxactive">isrbxactive</a><a class="side-fn" href="/input/#setclipboard">setclipboard</a><a class="side-fn" href="/input/#getclipboard">getclipboard</a></div>
+      </details><details class="side-lib">
+        <summary class="side-link" data-href="/console/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 17 6-6-6-6M12 19h8"/></svg><span>Console</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/console/#rconsolecreate">rconsolecreate</a><a class="side-fn" href="/console/#rconsoledestroy">rconsoledestroy</a><a class="side-fn" href="/console/#rconsoleprint">rconsoleprint</a><a class="side-fn" href="/console/#rconsoleinfo">rconsoleinfo</a><a class="side-fn" href="/console/#rconsolewarn">rconsolewarn</a><a class="side-fn" href="/console/#rconsoleerr">rconsoleerr</a><a class="side-fn" href="/console/#rconsoleinput">rconsoleinput</a><a class="side-fn" href="/console/#rconsoleclear">rconsoleclear</a><a class="side-fn" href="/console/#rconsolename">rconsolename</a><a class="side-fn" href="/console/#rconsoletop">rconsoletop</a><a class="side-fn" href="/console/#rconsolehide">rconsolehide</a><a class="side-fn" href="/console/#rconsoleshow">rconsoleshow</a><a class="side-fn" href="/console/#rconsoletoggle">rconsoletoggle</a><a class="side-fn" href="/console/#rconsolehidden">rconsolehidden</a></div>
+      </details><details class="side-lib">
+        <summary class="side-link" data-href="/crypt/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Crypt</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/crypt/#crypt-hash">crypt.hash</a><a class="side-fn" href="/crypt/#crypt-hmac">crypt.hmac</a><a class="side-fn" href="/crypt/#crypt-encrypt">crypt.encrypt</a><a class="side-fn" href="/crypt/#crypt-decrypt">crypt.decrypt</a><a class="side-fn" href="/crypt/#crypt-generatekey">crypt.generatekey</a><a class="side-fn" href="/crypt/#crypt-generatebytes">crypt.generatebytes</a><a class="side-fn" href="/crypt/#crypt-random">crypt.random</a></div>
+      </details><details class="side-lib">
+        <summary class="side-link" data-href="/encoding/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M10 12h2v6M10 18h4"/></svg><span>Encoding</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/encoding/#base64encode">base64encode</a><a class="side-fn" href="/encoding/#base64decode">base64decode</a><a class="side-fn" href="/encoding/#lz4compress">lz4compress</a><a class="side-fn" href="/encoding/#lz4decompress">lz4decompress</a></div>
+      </details><details class="side-lib">
+        <summary class="side-link" data-href="/network/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3M12 12V8"/></svg><span>Network</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/network/#request">request</a><a class="side-fn" href="/network/#game-httpget">game:HttpGet</a><a class="side-fn" href="/network/#game-httppost">game:HttpPost</a><a class="side-fn" href="/network/#websocket-connect">WebSocket.connect</a></div>
+      </details><details class="side-lib">
+        <summary class="side-link" data-href="/miscellaneous/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.8L20 11l-6.1 2.2L12 19l-1.9-5.8L4 11l6.1-2.2z"/></svg><span>Miscellaneous</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/miscellaneous/#identifyexecutor">identifyexecutor</a><a class="side-fn" href="/miscellaneous/#getexecutorversion">getexecutorversion</a><a class="side-fn" href="/miscellaneous/#queue-on-teleport">queue_on_teleport</a><a class="side-fn" href="/miscellaneous/#clearteleportqueue">clearteleportqueue</a><a class="side-fn" href="/miscellaneous/#setfpscap">setfpscap</a><a class="side-fn" href="/miscellaneous/#getfpscap">getfpscap</a><a class="side-fn" href="/miscellaneous/#getfflag">getfflag</a><a class="side-fn" href="/miscellaneous/#setfflag">setfflag</a><a class="side-fn" href="/miscellaneous/#getfflagtype">getfflagtype</a><a class="side-fn" href="/miscellaneous/#gethwid">gethwid</a><a class="side-fn" href="/miscellaneous/#messagebox">messagebox</a><a class="side-fn" href="/miscellaneous/#toast-notification">toast_notification</a><a class="side-fn" href="/miscellaneous/#getobjects">GetObjects</a><a class="side-fn" href="/miscellaneous/#info">info</a><a class="side-fn" href="/miscellaneous/#get-process-identifier">get_process_identifier</a></div>
+      </details>
+    </div><div class="side-group">
+      <div class="side-heading">Graphics &amp; Tools</div>
+      
+      <details class="side-lib">
+        <summary class="side-link" data-href="/drawing/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg><span>Drawing</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/drawing/#drawing-new">Drawing.new</a><a class="side-fn" href="/drawing/#drawing-fonts">Drawing.Fonts</a><a class="side-fn" href="/drawing/#isrenderobj">isrenderobj</a><a class="side-fn" href="/drawing/#getrenderproperty">getrenderproperty</a><a class="side-fn" href="/drawing/#setrenderproperty">setrenderproperty</a><a class="side-fn" href="/drawing/#cleardrawcache">cleardrawcache</a></div>
+      </details><details class="side-lib">
+        <summary class="side-link" data-href="/raknet/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3M12 12V8"/></svg><span>RakNet</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/raknet/#raknet-add-send-hook">raknet.add_send_hook</a><a class="side-fn" href="/raknet/#raknet-remove-send-hook">raknet.remove_send_hook</a><a class="side-fn" href="/raknet/#raknet-add-receive-hook">raknet.add_receive_hook</a><a class="side-fn" href="/raknet/#raknet-remove-receive-hook">raknet.remove_receive_hook</a><a class="side-fn" href="/raknet/#raknet-onpacketsend">raknet.OnPacketSend</a><a class="side-fn" href="/raknet/#raknet-onpacketreceive">raknet.OnPacketReceive</a><a class="side-fn" href="/raknet/#raknet-send">raknet.send</a><a class="side-fn" href="/raknet/#raknet-bitstream-new">raknet.BitStream.new</a><a class="side-fn" href="/raknet/#raknet-desync">raknet.desync</a><a class="side-fn" href="/raknet/#raknet-is-enabled">raknet.is_enabled</a><a class="side-fn" href="/raknet/#raknet-status">raknet.status</a><a class="side-fn" href="/raknet/#raknet-getpacketlog">raknet.getpacketlog</a><a class="side-fn" href="/raknet/#raknet-clearpacketlog">raknet.clearpacketlog</a></div>
+      </details><details class="side-lib">
+        <summary class="side-link" data-href="/decompiler/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg><span>Decompiler</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/decompiler/#decompile">decompile</a><a class="side-fn" href="/decompiler/#decompileroptions-new">DecompilerOptions.new</a><a class="side-fn" href="/decompiler/#decompilerformatter-new">DecompilerFormatter.new</a></div>
+      </details><details class="side-lib">
+        <summary class="side-link" data-href="/saveinstance/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg><span>Save Instance</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/saveinstance/#saveinstance">saveinstance</a><a class="side-fn" href="/saveinstance/#saveplace">saveplace</a><a class="side-fn" href="/saveinstance/#saveinstanceoptions-new">SaveInstanceOptions.new</a></div>
+      </details>
+    </div><div class="side-group compat">
+      <div class="side-heading">Compatibility</div>
+      <p class="side-note">APIs from other executors, so their scripts run on supQ unchanged.</p>
+      <details class="side-lib">
+        <summary class="side-link" data-href="/signal/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg><span>Signal objects</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/signal/#signal-new">Signal.new</a><a class="side-fn" href="/signal/#signal-connect">Signal:Connect</a><a class="side-fn" href="/signal/#signal-once">Signal:Once</a><a class="side-fn" href="/signal/#signal-wait">Signal:Wait</a><a class="side-fn" href="/signal/#signal-fire">Signal:Fire</a><a class="side-fn" href="/signal/#signal-disconnectall">Signal:DisconnectAll</a></div>
+      </details><details class="side-lib">
+        <summary class="side-link" data-href="/luastateproxy/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg><span>LuaStateProxy</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/luastateproxy/#luastateproxy-new">LuaStateProxy.new</a><a class="side-fn" href="/luastateproxy/#state-execute">state:Execute</a><a class="side-fn" href="/luastateproxy/#state-getactors">state:GetActors</a><a class="side-fn" href="/luastateproxy/#state-id">state.Id</a><a class="side-fn" href="/luastateproxy/#state-isactorstate">state.IsActorState</a><a class="side-fn" href="/luastateproxy/#state-event">state.Event</a></div>
+      </details><details class="side-lib" open>
+        <summary class="side-link active" data-href="/oth/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><path d="M6 9v6M18 9a9 9 0 0 1-9 9"/></svg><span>oth</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/oth/#oth-hook">oth.hook</a><a class="side-fn" href="/oth/#oth-unhook">oth.unhook</a><a class="side-fn" href="/oth/#oth-get-original-thread">oth.get_original_thread</a><a class="side-fn" href="/oth/#oth-get-root-callback">oth.get_root_callback</a><a class="side-fn" href="/oth/#oth-is-hook-thread">oth.is_hook_thread</a></div>
+      </details><details class="side-lib">
+        <summary class="side-link" data-href="/drawingimmediate/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.1 11.1 18 2.2a1.6 1.6 0 0 1 2.3 2.3l-8.9 8.9M7 14a3 3 0 0 0-3 3c0 1.3-1 2-2 2 1 1.5 3 2 4 2a4 4 0 0 0 4-4 3 3 0 0 0-3-3z"/></svg><span>DrawingImmediate</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/drawingimmediate/#drawingimmediate-getpaint">DrawingImmediate.GetPaint</a><a class="side-fn" href="/drawingimmediate/#drawingimmediate-line">DrawingImmediate.Line</a><a class="side-fn" href="/drawingimmediate/#drawingimmediate-circle">DrawingImmediate.Circle</a><a class="side-fn" href="/drawingimmediate/#drawingimmediate-filledcircle">DrawingImmediate.FilledCircle</a><a class="side-fn" href="/drawingimmediate/#drawingimmediate-triangle">DrawingImmediate.Triangle</a><a class="side-fn" href="/drawingimmediate/#drawingimmediate-filledtriangle">DrawingImmediate.FilledTriangle</a><a class="side-fn" href="/drawingimmediate/#drawingimmediate-rectangle">DrawingImmediate.Rectangle</a><a class="side-fn" href="/drawingimmediate/#drawingimmediate-filledrectangle">DrawingImmediate.FilledRectangle</a><a class="side-fn" href="/drawingimmediate/#drawingimmediate-quad">DrawingImmediate.Quad</a><a class="side-fn" href="/drawingimmediate/#drawingimmediate-filledquad">DrawingImmediate.FilledQuad</a><a class="side-fn" href="/drawingimmediate/#drawingimmediate-text">DrawingImmediate.Text</a><a class="side-fn" href="/drawingimmediate/#drawingimmediate-outlinedtext">DrawingImmediate.OutlinedText</a></div>
+      </details><details class="side-lib">
+        <summary class="side-link" data-href="/fonts-shaders/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg><span>Fonts &amp; Shaders</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/fonts-shaders/#drawfont-register">DrawFont.Register</a><a class="side-fn" href="/fonts-shaders/#drawing-new-font">Drawing.new(&quot;Font&quot;)</a><a class="side-fn" href="/fonts-shaders/#drawing-new-shader">Drawing.new(&quot;Shader&quot;)</a></div>
+      </details><details class="side-lib">
+        <summary class="side-link" data-href="/json/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5a2 2 0 0 0 2 2h1"/><path d="M16 21h1a2 2 0 0 0 2-2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></svg><span>json</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/json/#json-encode">json.encode</a><a class="side-fn" href="/json/#json-encodepretty">json.encodePretty</a><a class="side-fn" href="/json/#json-decode">json.decode</a><a class="side-fn" href="/json/#json-decodesafe">json.decodeSafe</a><a class="side-fn" href="/json/#json-validate">json.validate</a><a class="side-fn" href="/json/#json-format">json.format</a><a class="side-fn" href="/json/#json-minify">json.minify</a><a class="side-fn" href="/json/#json-escape">json.escape</a><a class="side-fn" href="/json/#json-quote">json.quote</a><a class="side-fn" href="/json/#json-unescape">json.unescape</a><a class="side-fn" href="/json/#json-array">json.array</a><a class="side-fn" href="/json/#json-object">json.object</a><a class="side-fn" href="/json/#json-isarray">json.isArray</a><a class="side-fn" href="/json/#json-isobject">json.isObject</a><a class="side-fn" href="/json/#json-isnull">json.isNull</a><a class="side-fn" href="/json/#json-type">json.type</a><a class="side-fn" href="/json/#json-keys">json.keys</a><a class="side-fn" href="/json/#json-values">json.values</a><a class="side-fn" href="/json/#json-getpath">json.getPath</a><a class="side-fn" href="/json/#json-clone">json.clone</a></div>
+      </details><details class="side-lib">
+        <summary class="side-link" data-href="/imgui/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 4v4M2 8h20M6 4v4"/></svg><span>imgui</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/imgui/#imgui-create">imgui.create</a><a class="side-fn" href="/imgui/#imgui-setvsync">imgui.setvsync</a><a class="side-fn" href="/imgui/#window-text">window:Text</a><a class="side-fn" href="/imgui/#window-button">window:Button</a><a class="side-fn" href="/imgui/#window-checkbox">window:Checkbox</a><a class="side-fn" href="/imgui/#window-sliderfloat">window:SliderFloat</a><a class="side-fn" href="/imgui/#window-sliderint">window:SliderInt</a><a class="side-fn" href="/imgui/#window-inputtext">window:InputText</a><a class="side-fn" href="/imgui/#window-colorpicker">window:ColorPicker</a><a class="side-fn" href="/imgui/#window-collapsingheader">window:CollapsingHeader</a><a class="side-fn" href="/imgui/#window-sameline">window:SameLine</a><a class="side-fn" href="/imgui/#window-separator">window:Separator</a><a class="side-fn" href="/imgui/#window-destroy">window:destroy</a></div>
+      </details><details class="side-lib">
+        <summary class="side-link" data-href="/regex/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3v10M12.7 5.5l8.6 5M12.7 10.5l8.6-5"/><rect x="3" y="15" width="6" height="6" rx="1"/></svg><span>Regex</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/regex/#regex-new">Regex.new</a><a class="side-fn" href="/regex/#regex-escape">Regex.Escape</a></div>
+      </details><details class="side-lib">
+        <summary class="side-link" data-href="/disassembler/">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12h-8M21 6H8M21 18h-8M3 6v4c0 1.1.9 2 2 2h3M3 10v6c0 1.1.9 2 2 2h3"/></svg><span>Disassembler</span>
+          <span class="side-chevron"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+        </summary>
+        <div class="side-fns"><a class="side-fn" href="/disassembler/#disassemble">disassemble</a></div>
+      </details>
+    </div></nav>
+    <main class="main" id="main">
+    <div class="crumbs"><a href="/">Docs</a><span>/</span><span>Compatibility</span></div>
+    <h1><svg class="icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><path d="M6 9v6M18 9a9 9 0 0 1-9 9"/></svg>oth</h1>
+    <div class="origins"><span class="origin">Volt</span></div>
+    <p class="lead">Hooks that run on their own thread, so the hooked game code cannot see your stack.</p>
+    
+    <div class="callout"><svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.8L20 11l-6.1 2.2L12 19l-1.9-5.8L4 11l6.1-2.2z"/></svg><span>This API comes from Volt. supQ implements it so scripts written for it run unchanged.</span></div>
+    <div class="fn-list"><section class="fn" id="oth-hook">
+    <h3 class="fn-name"><a href="#oth-hook" class="anchor" aria-label="Link to oth.hook"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.8 1.7M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></a>oth.hook</h3>
+    <div class="sig"><code><span class="s-name">oth.hook</span>(<span class="s-param">target</span>: <span class="s-type">function</span>, <span class="s-param">hook</span>: <span class="s-type">function</span>) <span class="s-arrow">-&gt;</span> <span class="s-type">function</span></code><button class="copy" data-copy aria-label="Copy signature"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div>
+    <p>Hooks <code>target</code>; <code>hook</code> runs on a separate thread. Returns the original.</p>
+    <div class="codeblock"><div class="codeblock-head"><span>Example</span><button class="copy" data-copy aria-label="Copy example"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><pre><code><span class="t-kw">local</span> original
+original = oth.<span class="t-fn">hook</span>(someGameFunction, <span class="t-kw">function</span>(...)
+    <span class="t-glob">print</span>(<span class="t-str">&quot;called with&quot;</span>, ...)
+    <span class="t-kw">return</span> <span class="t-fn">original</span>(...)
+<span class="t-kw">end</span>)</code></pre></div>
+  </section><section class="fn" id="oth-unhook">
+    <h3 class="fn-name"><a href="#oth-unhook" class="anchor" aria-label="Link to oth.unhook"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.8 1.7M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></a>oth.unhook</h3>
+    <div class="sig"><code><span class="s-name">oth.unhook</span>(<span class="s-param">target</span>: <span class="s-type">function</span>) <span class="s-arrow">-&gt;</span> <span class="s-type">boolean</span></code><button class="copy" data-copy aria-label="Copy signature"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div>
+    <p>Removes an oth hook.</p>
+    
+  </section><section class="fn" id="oth-get-original-thread">
+    <h3 class="fn-name"><a href="#oth-get-original-thread" class="anchor" aria-label="Link to oth.get_original_thread"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.8 1.7M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></a>oth.get_original_thread</h3>
+    <div class="sig"><code><span class="s-name">oth.get_original_thread</span>() <span class="s-arrow">-&gt;</span> <span class="s-type">thread</span>?</code><button class="copy" data-copy aria-label="Copy signature"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div>
+    <p>Inside a hook, returns the thread that made the call.</p>
+    
+  </section><section class="fn" id="oth-get-root-callback">
+    <h3 class="fn-name"><a href="#oth-get-root-callback" class="anchor" aria-label="Link to oth.get_root_callback"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.8 1.7M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></a>oth.get_root_callback</h3>
+    <div class="sig"><code><span class="s-name">oth.get_root_callback</span>() <span class="s-arrow">-&gt;</span> <span class="s-type">function</span>?</code><button class="copy" data-copy aria-label="Copy signature"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div>
+    <p>Inside a hook, returns the function the game originally called.</p>
+    
+  </section><section class="fn" id="oth-is-hook-thread">
+    <h3 class="fn-name"><a href="#oth-is-hook-thread" class="anchor" aria-label="Link to oth.is_hook_thread"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.8 1.7M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></a>oth.is_hook_thread</h3>
+    <div class="sig"><code><span class="s-name">oth.is_hook_thread</span>() <span class="s-arrow">-&gt;</span> <span class="s-type">boolean</span></code><button class="copy" data-copy aria-label="Copy signature"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div>
+    <p>Returns whether the current thread is an oth hook thread.</p>
+    
+  </section></div>
+    <nav class="pager"><a class="pager-link prev" href="/luastateproxy/"><span class="pager-dir">Previous</span><span>LuaStateProxy</span></a><a class="pager-link next" href="/drawingimmediate/"><span class="pager-dir">Next</span><span>DrawingImmediate</span></a></nav></main>
+    <aside class="toc" aria-label="On this page">
+        <div class="toc-title"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M3 12h12M3 18h15"/></svg><span>On this page</span></div>
+        <a class="toc-link" href="#oth-hook">oth.hook</a><a class="toc-link" href="#oth-unhook">oth.unhook</a><a class="toc-link" href="#oth-get-original-thread">oth.get_original_thread</a><a class="toc-link" href="#oth-get-root-callback">oth.get_root_callback</a><a class="toc-link" href="#oth-is-hook-thread">oth.is_hook_thread</a>
+      </aside>
+  </div>
+  <div class="scrim" id="scrim"></div>
+  <div class="search" id="search" role="dialog" aria-modal="true" aria-label="Search" hidden>
+    <div class="search-box">
+      <div class="search-input-row"><svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><input id="searchInput" type="search" placeholder="Search functions, aliases, libraries…" autocomplete="off" spellcheck="false"><kbd>Esc</kbd></div>
+      <div class="search-results" id="searchResults" role="listbox"></div>
+    </div>
+  </div>
+  <script src="/app.js?v=mv9p1web" defer></script>
+</body>
+</html>

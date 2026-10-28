@@ -1,0 +1,16 @@
+{
+  "name": "supq-docs",
+  "compatibility_date": "2026-10-01",
+
+  "build": { "command": "node build.mjs" },
+
+  "assets": {
+    "directory": "./public",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+
+  "routes": [{ "pattern": "docs.supq.lol", "custom_domain": true }],
+
+  "workers_dev": false
+}

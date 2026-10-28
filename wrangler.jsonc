@@ -1,0 +1,32 @@
+{
+  // $schema is set once the site is a real npm project; leave for later.
+  //
+  // Name matches the existing worker on this account so `wrangler deploy`
+  // updates it in place. The supq.lol custom domain is bound in the
+  // Cloudflare dashboard (Workers & Pages → supqlol → Domains), so we
+  // don't declare routes here — those are dashboard-managed.
+  "name": "supqlol",
+  "main": "./src/index.js",
+  "compatibility_date": "2026-08-01",
+  "observability": { "enabled": true },
+
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    // 404 hits fall back to /404.html if we ever add one; otherwise a
+    // hard 404. Don't use "single-page-application" — this is not a SPA
+    // and the bootstrapper worker owns /dl/* on the same domain.
+    "not_found_handling": "404-page",
+    // Only these two paths reach the Worker. Every other request is served
+    // from the edge without an invocation, exactly as before.
+    "run_worker_first": ["/supQ-Setup.exe", "/api/downloads"]
+  },
+
+  "durable_objects": {
+    "bindings": [{ "name": "DOWNLOADS", "class_name": "DownloadCounter" }]
+  },
+  "migrations": [
+    { "tag": "v1", "new_sqlite_classes": ["DownloadCounter"] }
+  ]
+}
